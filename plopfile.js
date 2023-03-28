@@ -66,15 +66,6 @@ const generateContainerOrPage = (isPage = false) => {
       templateFile: `generatorTemplates${isPage ? '/page/Page' : '/component/Component'}.js.hbs`,
       data: { isCssModules },
     },
-    {
-      type: 'add',
-      path: `${rootDirectory}/js/containers${isPage ? '/pages' : ''}/{{camelCase name}}${
-        isPage ? 'Page' : ''
-      }/{{pascalCase name}}${isPage ? 'Page' : ''}.test.jsx`,
-      templateFile: `generatorTemplates${
-        isPage ? '/page/Page' : '/component/Component'
-      }.test.js.hbs`,
-    },
   ];
 
   if (isCssModules) {
@@ -123,11 +114,6 @@ module.exports = (plop) => {
           // Handlebars template used to generate content of new file
           templateFile: 'generatorTemplates/component/Component.js.hbs',
           data: { isCssModules },
-        },
-        {
-          type: 'add',
-          path: `${rootDirectory}/js/components/{{camelCase name}}/{{pascalCase name}}.test.jsx`,
-          templateFile: 'generatorTemplates/component/Component.test.js.hbs',
         },
       ];
 

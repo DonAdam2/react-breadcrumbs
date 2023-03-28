@@ -1,22 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'prettier',
-    'plugin:react-hooks/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended',
-  ],
-  plugins: ['babel', 'react', 'jest', 'testing-library', 'jest-dom', 'prettier'],
+  extends: ['eslint:recommended', 'prettier', 'plugin:react-hooks/recommended'],
+  plugins: ['babel', 'react', 'prettier'],
   parser: '@babel/eslint-parser',
   env: {
     browser: true,
     node: true,
-    commonjs: true,
-    jest: true,
     es6: true,
   },
   parserOptions: {
