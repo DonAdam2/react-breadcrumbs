@@ -1,0 +1,29 @@
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: arial, sans-serif;
+  background-color: $breadcrumb-bg-color;
+  border-radius: 0.25rem;
+  list-style-type: none;
+  padding: 0;
+
+  &-item {
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+    padding: $space 0 $space $space;
+
+    a {
+      text-decoration: none;
+      color: $breadcrumb-link-color;
+      font-weight: 700;
+      padding-inline-end: $space;
+    }
+
+    &.active {
+      color: $breadcrumb-text-color-active;
+      font-weight: $breadcrumb-text-weight-active;
+    }
+  }
+}

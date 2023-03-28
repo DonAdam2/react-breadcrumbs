@@ -1,0 +1,12 @@
+.main-menu {
+  a {
+    text-decoration: none;
+    color: $breadcrumb-link-color;
+    font-weight: 700;
+
+    &.active {
+      color: $breadcrumb-text-color-active;
+      font-weight: $breadcrumb-text-weight-active;
+    }
+  }
+}

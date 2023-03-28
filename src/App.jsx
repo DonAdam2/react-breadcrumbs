@@ -1,31 +1,13 @@
-import { lazy, Suspense } from 'react';
-//error boundary
-import { ErrorBoundary } from 'react-error-boundary';
-//error boundary fallback
-import ErrorBoundaryFallback from './js/generic/ErrorBoundaryFallback';
-//components
-import LoadingIcon from './js/components/shared/LoadingIcon';
-const TestComponent = lazy(() => import('./js/containers/testComponent/TestComponent'));
+import Router, { routes } from '@/js/routing/routingConstants/RoutesConfig';
+import Header from '@/js/components/header/Header';
+import Breadcrumbs from '@/js/components/breadcrumbs/Breadcrumbs';
 
 const App = () => (
-  <ErrorBoundary
-    FallbackComponent={ErrorBoundaryFallback}
-    onReset={() => {
-      //Reset the state of your app so the error doesn't happen again
-      console.log('Try again clicked');
-    }}
-  >
-    <Suspense
-      fallback={
-        <div className="loader-wrapper">
-          <LoadingIcon />
-        </div>
-      }
-    >
-      <h1 style={{ textAlign: 'center' }}>Webpack react boilerplate</h1>
-      <TestComponent />
-    </Suspense>
-  </ErrorBoundary>
+  <div className="container">
+    <Header />
+    <Breadcrumbs links={routes} />
+    <Router />
+  </div>
 );
 
 export default App;
