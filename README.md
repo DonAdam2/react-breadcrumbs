@@ -2,6 +2,39 @@
 
 This project shows you how to create a breadcrumbs component with react router dom v6
 
+### To display nested routes only:
+
+- Set `isDisplayNestedRoutesOnly` to `true` in `/src/js/components/breadcrumbs/Breadcrumbs.jsx`
+
+  ```
+  modifiedRoutes = constructBreadcrumbsLinks({ routes, isDisplayNestedRoutesOnly: true });
+  ```
+
+- Pass `constructBreadcrumbsLinks({ routes })` to `useRoutes` hook in `/src/js/routing/routingConstants/RoutesConfig`
+
+  ```
+  export default function Router() {
+    return useRoutes(constructBreadcrumbsLinks({ routes }));
+  }
+  ```
+
+### To display parent routes with nested routes:
+
+- Set `isDisplayNestedRoutesOnly` to `false` in `/src/js/components/breadcrumbs/Breadcrumbs.jsx`
+
+  ```
+  modifiedRoutes = constructBreadcrumbsLinks({ routes, isDisplayNestedRoutesOnly: false });
+  ```
+
+- Pass `routes` to `useRoutes` hook in `/src/js/routing/routingConstants/RoutesConfig`
+
+  ```
+  export default function Router() {
+    return useRoutes(routes);
+  }
+  ```
+- Use the `<Outlet />` component in parent routes
+
 ## Prerequisites:
 
 - nodeJS > 14.X.X or Docker

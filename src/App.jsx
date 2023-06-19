@@ -5,7 +5,7 @@ import Breadcrumbs from '@/js/components/breadcrumbs/Breadcrumbs';
 const App = () => (
   <div className="container">
     <Header />
-    <Breadcrumbs links={routes} />
+    <Breadcrumbs routes={routes} />
     <Router />
   </div>
 );

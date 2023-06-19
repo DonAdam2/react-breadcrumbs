@@ -1,8 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
+//constants
+import { constructBreadcrumbsLinks } from '@/js/routing/routingConstants/RoutingHelpers';
 
-const Breadcrumbs = ({ isDisplayHomeLink = false, divider, links }) => {
+const Breadcrumbs = ({ isDisplayHomeLink = false, divider, routes }) => {
   const { pathname } = useLocation(),
-    pathNames = pathname.split('/').filter(Boolean);
+    pathNames = pathname.split('/').filter(Boolean),
+    modifiedRoutes = constructBreadcrumbsLinks({ routes, isDisplayNestedRoutesOnly: true });
 
   return (
     <nav aria-label="breadcrumb">
@@ -15,8 +18,8 @@ const Breadcrumbs = ({ isDisplayHomeLink = false, divider, links }) => {
         {pathNames.map((name, index, arr) => {
           const routeTo = `/${arr.slice(0, index + 1).join('/')}`,
             isLast = index === arr.length - 1,
-            linkLabel = links
-              ? links.find((link) =>
+            linkLabel = routes
+              ? modifiedRoutes.find((link) =>
                   link.path
                     .split('/')
                     .filter(Boolean)
