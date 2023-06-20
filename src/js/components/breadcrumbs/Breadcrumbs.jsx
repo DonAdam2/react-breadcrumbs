@@ -2,9 +2,10 @@ import { Link, useLocation } from 'react-router-dom';
 //constants
 import { constructBreadcrumbsLinks } from '@/js/routing/routingConstants/RoutingHelpers';
 
-const Breadcrumbs = ({ isDisplayHomeLink = false, divider, routes }) => {
+const Breadcrumbs = ({ isLanguageInUrl = false, isDisplayHomeLink = false, divider, routes }) => {
   const { pathname } = useLocation(),
-    pathNames = pathname.split('/').filter(Boolean),
+    initialPathNames = pathname.split('/').filter(Boolean),
+    pathNames = isLanguageInUrl ? initialPathNames.slice(1) : initialPathNames,
     modifiedRoutes = constructBreadcrumbsLinks({ routes, isDisplayNestedRoutesOnly: true });
 
   return (
