@@ -30,7 +30,15 @@ const Breadcrumbs = ({ isLanguageInUrl = false, isDisplayHomeLink = false, divid
                     .find((pathChunk) => pathChunk === name)
                 )?.label
               : undefined,
-            currentName = linkLabel ?? name;
+            currentName = linkLabel ?? name,
+            linkIcon = routes
+              ? modifiedRoutes.find((link) =>
+                  link.path
+                    .split('/')
+                    .filter(Boolean)
+                    .find((pathChunk) => pathChunk === name)
+                )?.icon
+              : undefined;
 
           return (
             <li
@@ -38,6 +46,7 @@ const Breadcrumbs = ({ isLanguageInUrl = false, isDisplayHomeLink = false, divid
               className={`breadcrumb-item${isLast ? ' active' : ''}`}
               aria-current={isLast ? 'page' : undefined}
             >
+              {linkIcon}
               {isLast ? (
                 currentName
               ) : (

@@ -14,6 +14,12 @@
     justify-self: center;
     padding: $space 0 $space $space;
 
+    svg {
+      margin-inline-end: $space;
+      width: 13px;
+      height: 13px;
+    }
+
     a {
       text-decoration: none;
       color: $breadcrumb-link-color;
