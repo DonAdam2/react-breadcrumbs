@@ -4,6 +4,8 @@ import { constructBreadcrumbsLinks } from '@/js/routing/routingConstants/Routing
 
 const Breadcrumbs = ({ isLanguageInUrl = false, isDisplayHomeLink = false, divider, routes }) => {
   const { pathname } = useLocation(),
+    //TODO: replace this with your app language
+    currentLanguage = 'en',
     initialPathNames = pathname.split('/').filter(Boolean),
     pathNames = isLanguageInUrl ? initialPathNames.slice(1) : initialPathNames,
     modifiedRoutes = constructBreadcrumbsLinks({ routes, isDisplayNestedRoutesOnly: true });
@@ -17,7 +19,8 @@ const Breadcrumbs = ({ isLanguageInUrl = false, isDisplayHomeLink = false, divid
           </li>
         )}
         {pathNames.map((name, index, arr) => {
-          const routeTo = `/${arr.slice(0, index + 1).join('/')}`,
+          const routeUrl = `/${arr.slice(0, index + 1).join('/')}`,
+            routeTo = isLanguageInUrl ? `/${currentLanguage}${routeUrl}` : routeUrl,
             isLast = index === arr.length - 1,
             linkLabel = routes
               ? modifiedRoutes.find((link) =>
