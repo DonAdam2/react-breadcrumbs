@@ -30,7 +30,7 @@ const Breadcrumbs = ({ isLanguageInUrl = false, isDisplayHomeLink = false, divid
                     .find((pathChunk) => pathChunk === name)
                 )?.label
               : undefined,
-            currentName = linkLabel ?? name.replace(/%20/g, ' '),
+            currentName = decodeURIComponent(linkLabel ?? name.replace(/%20/g, ' ')),
             linkIcon = routes
               ? modifiedRoutes.find((link) =>
                   link.path
