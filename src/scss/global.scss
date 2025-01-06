@@ -1,6 +1,6 @@
-@import 'generic.scss';
-@import 'components.scss';
-@import 'containers.scss';
+@use 'generic.scss';
+@use 'components.scss';
+@use 'containers.scss';
 
 .container {
   width: calc(100% - 1rem);
