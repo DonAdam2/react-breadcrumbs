@@ -12,9 +12,11 @@ const path = require('path'),
   } = require('./constants'),
   { publicDirPath, srcPath, outputSrcPath } = require('./paths');
 
-module.exports = (env, options) => {
+module.exports = async (env, options) => {
   // the mode variable is passed in package.json scripts (development, production)
   const isDevelopment = options.mode === 'development';
+
+  const postcssPresetEnv = (await import('postcss-preset-env')).default;
 
   return {
     entry: `${srcPath}/index.jsx`,
@@ -121,14 +123,11 @@ module.exports = (env, options) => {
                   ident: 'postcss',
                   plugins: [
                     'postcss-flexbugs-fixes',
-                    [
-                      'postcss-preset-env',
-                      {
-                        stage: 0,
-                        //uncomment the following if you want to prefix grid properties
-                        // autoprefixer: { grid: true },
-                      },
-                    ],
+                    postcssPresetEnv({
+                      stage: 0,
+                      //uncomment the following if you want to prefix grid properties
+                      // autoprefixer: { grid: true },
+                    }),
                     // Adds PostCSS Normalize as the reset css with default options,
                     // so that it honors browserslist config in package.json
                     // which in turn let's users customize the target behavior as per their needs.

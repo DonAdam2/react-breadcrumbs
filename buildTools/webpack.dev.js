@@ -11,8 +11,8 @@ const { merge } = require('webpack-merge'),
   { protocol } = require('./constants'),
   { environmentsPath } = require('./paths');
 
-module.exports = (env, options) => {
-  return merge(common(env, options), {
+module.exports = async (env, options) => {
+  return merge(await common(env, options), {
     mode: 'development',
     devtool: 'eval',
     //required for hot reload
@@ -41,6 +41,8 @@ module.exports = (env, options) => {
       },
     },
     plugins: [
+      // enables HMR when using the programmatic API (scripts/start.js)
+      new (require('webpack').HotModuleReplacementPlugin)(),
       // enables fast refresh
       new ReactRefreshWebpackPlugin(),
       new Dotenv({
