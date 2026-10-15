@@ -1,13 +1,14 @@
-const path = require('path'),
-  js = require('@eslint/js'),
-  react = require('eslint-plugin-react'),
-  reactHooks = require('eslint-plugin-react-hooks'),
-  prettier = require('eslint-plugin-prettier'),
-  prettierConfig = require('eslint-config-prettier'),
-  babelParser = require('@babel/eslint-parser'),
-  globals = require('globals');
+import js from '@eslint/js';
+import eslintReact from '@eslint-react/eslint-plugin';
+import reactHooks from 'eslint-plugin-react-hooks';
+import prettier from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier';
+import globals from 'globals';
 
-module.exports = [
+export default [
+  // Build output
+  { ignores: ['dist/'] },
+
   // ESLint recommended
   js.configs.recommended,
 
@@ -18,7 +19,6 @@ module.exports = [
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
-      parser: babelParser,
       ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: {
@@ -29,9 +29,6 @@ module.exports = [
           restParams: true,
           experimentalObjectRestSpread: true,
         },
-        babelOptions: {
-          configFile: path.join(__dirname, 'babel.config.js'),
-        },
       },
       globals: {
         ...globals.browser,
@@ -41,14 +38,15 @@ module.exports = [
       },
     },
     plugins: {
-      react: react,
+      ...eslintReact.configs.recommended.plugins,
       'react-hooks': reactHooks,
       prettier: prettier,
     },
     rules: {
       // React recommended rules
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
+      ...eslintReact.configs.recommended.rules,
+      // Hooks rules are handled by eslint-plugin-react-hooks below
+      ...eslintReact.configs['disable-conflict-eslint-plugin-react-hooks'].rules,
 
       // React Hooks recommended
       ...reactHooks.configs.recommended.rules,
@@ -57,8 +55,6 @@ module.exports = [
       'prettier/prettier': 'error',
       'no-unused-vars': 'warn',
       'no-empty': 'warn',
-      'react/prop-types': 'off',
-      'react/no-unescaped-entities': 'off',
 
       // Ensure React hooks rules are active
       'react-hooks/rules-of-hooks': 'error',
@@ -66,9 +62,6 @@ module.exports = [
     },
     settings: {
       'import/resolver': 'webpack',
-      react: {
-        version: 'detect',
-      },
     },
   },
 ];
